@@ -46,9 +46,6 @@ public class Drone {
     @Column(nullable = false)
     private DroneState droneState;
 
-    @OneToMany(mappedBy =  "drone", cascade = CascadeType.ALL,fetch= FetchType.EAGER)
-    private List<Medication> medications;
-
     public Drone(@Size(max = 100) String serialNumber, DroneModel model, @Max(500) @Min(0) double weightLimit, @Max(100) @Min(0) int batteryCapacity, DroneState droneState) {
         this.serialNumber = serialNumber;
         this.model = model;

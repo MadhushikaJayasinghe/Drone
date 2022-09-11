@@ -1,6 +1,7 @@
 package com.drone.drone.controller;
 
 import com.drone.drone.dto.DroneRegistrationDto;
+import com.drone.drone.dto.MedicationsLoadingDto;
 import com.drone.drone.service.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,10 @@ public class DroneController {
     @RequestMapping(value = "/drone/register", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public ResponseEntity registerDrone(@Valid @RequestBody DroneRegistrationDto droneRegistrationDto) {
         return droneService.registerDrone(droneRegistrationDto);
+    }
+
+    @RequestMapping(value = "/drone/load-medications", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public ResponseEntity loadMedications(@Valid @RequestBody MedicationsLoadingDto medicationsLoadingDto) {
+        return droneService.loadMedications(medicationsLoadingDto);
     }
 }

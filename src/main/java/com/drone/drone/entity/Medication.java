@@ -1,5 +1,7 @@
 package com.drone.drone.entity;
 
+import com.drone.drone.enums.DroneModel;
+import com.drone.drone.enums.MedicationOrderStatus;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -31,7 +33,9 @@ public class Medication {
     @Column( nullable = false)
     private String photoUrl;
 
-    @ManyToOne
-    @JoinColumn(name="drone_id")
-    private Drone drone;
+    private UUID droneId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "default OPEN")
+    private MedicationOrderStatus status;
 }

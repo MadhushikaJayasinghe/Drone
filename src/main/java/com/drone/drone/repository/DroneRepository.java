@@ -9,4 +9,6 @@ import java.util.UUID;
 @Repository
 public interface DroneRepository extends JpaRepository<Drone, UUID> {
     int countBySerialNumber(String serialNumber);
+    Drone getByDroneId(UUID droneId);
+
 }
