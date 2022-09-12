@@ -83,5 +83,10 @@ public class DroneServiceImpl implements DroneService {
         return new ResponseEntity<>(droneBatteryPercentageDto, HttpStatus.OK);
     }
 
+    @Override
+    public List<DroneBatteryPercentageDto> getDroneBatteryPercentage() {
+        return droneDao.getDroneBatteryPercentage();
+    }
+
 
 }

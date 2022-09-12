@@ -20,13 +20,18 @@ public class DroneDaoImpl implements DroneDao {
 
     @Override
     public List<DroneIdSerialDto> getAvailableDronesForLoading() {
-        return jdbcTemplate.query("SELECT drone_id,serial_number FROM drone WHERE state IN (IDLE , LOADING)",
+        return jdbcTemplate.query("SELECT drone_id,serial_number FROM drone WHERE battery_capacity > 24 AND state IN (IDLE , LOADING)",
                 new DroneIdSerialDtoRowMapper());
     }
 
     @Override
     public DroneBatteryPercentageDto getBatteryPercentageById(UUID droneId) {
-        return jdbcTemplate.queryForObject("SELECT drone_id,battery_capacity FROM drone WHERE drone_id = ?", new Object[]{droneId.toString()}, new DroneBatteryPercentageDtoRowMapper());
+        return jdbcTemplate.queryForObject("SELECT drone_id,battery_capacity FROM drone WHERE drone_id = ?",  new DroneBatteryPercentageDtoRowMapper(),droneId.toString());
+    }
+
+    @Override
+    public List<DroneBatteryPercentageDto> getDroneBatteryPercentage() {
+        return jdbcTemplate.query("SELECT drone_id, battery_capacity FROM drone", new DroneBatteryPercentageDtoRowMapper());
     }
 
     public static final class DroneIdSerialDtoRowMapper implements RowMapper<DroneIdSerialDto> {
