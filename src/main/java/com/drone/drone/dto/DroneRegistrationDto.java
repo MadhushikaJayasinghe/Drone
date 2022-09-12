@@ -17,7 +17,7 @@ public class DroneRegistrationDto {
 
     @Max(value = 500, message = "max weight limit is 500 grams")
     @Min(value = 0, message = "min weight limit is 0 grams")
-    private double weightLimit;
+    private int weightLimit;
 
     @Max(value = 100, message = "max battery capacity is 100")
     @Min(value = 0, message = "min battery capacity is 0")

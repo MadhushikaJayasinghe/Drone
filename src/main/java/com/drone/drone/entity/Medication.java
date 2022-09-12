@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +23,14 @@ public class Medication {
     private UUID medicationId;
 
     @Column( nullable = false)
+    @Pattern(regexp = "([A-Za-z0-9\\-\\_]+)", message = "name must contain only letters numbers , - and _")
     private  String name;
 
     @Column(nullable = false)
     private int weight;
 
-    @Column(columnDefinition = "char(36)", nullable = false) //check
+    @Column( nullable = false)
+    @Pattern(regexp = "([A-Z0-9\\_]+)", message = "code must contain only uppercase letters numbers and _")
     private  String code;
 
     @Column( nullable = false)
