@@ -43,6 +43,10 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public ResponseEntity loadMedications(MedicationsLoadingDto loadingDto) {
         Drone drone = droneRepository.getByDroneId(loadingDto.getDroneId());
+        if (drone==null){
+            ResponseDto responseDto = new ResponseDto(false, "drone id is not found", 404);
+            return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
+        }
         if (drone.getBatteryCapacity() < 25) {
             ResponseDto responseDto = new ResponseDto(false, "drone battery percentage is less than 25", 400);
             return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
@@ -64,7 +68,9 @@ public class DroneServiceImpl implements DroneService {
                 return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
             }
         }
-        medicationDao.updateStatus(loadingDto.getMedicationsIds());
+        for (String medicationId: loadingDto.getMedicationsIds()){
+            medicationDao.updateStatus(medicationId, drone.getDroneId().toString());
+        }
         drone.setState(DroneState.LOADING);
         droneRepository.save(drone);
         ResponseDto responseDto = new ResponseDto(true, "successfully updated", 200);

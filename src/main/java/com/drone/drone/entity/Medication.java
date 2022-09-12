@@ -25,7 +25,7 @@ public class Medication {
     private  String name;
 
     @Column(nullable = false)
-    private double weight;
+    private int weight;
 
     @Column(columnDefinition = "char(36)", nullable = false) //check
     private  String code;

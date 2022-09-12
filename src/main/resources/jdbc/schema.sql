@@ -14,7 +14,7 @@ medication_id CHAR (36)  PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 weight DOUBLE NOT NULL,
 code VARCHAR(100) NOT NULL,
-photoUrl VARCHAR NOT NULL,
+photo_url VARCHAR NOT NULL,
 drone_id CHAR (36),
 status VARCHAR(100)
 );
@@ -24,6 +24,5 @@ CREATE TABLE HISTORY_LOG (
 log_id CHAR (36)  PRIMARY KEY,
 drone_id CHAR (36),
 battery_capacity INT NOT NULL,
-created_at DATETIME NOT NULL,
-updated_at DATETIME NOT NULL
+created_at DATETIME NOT NULL
 );

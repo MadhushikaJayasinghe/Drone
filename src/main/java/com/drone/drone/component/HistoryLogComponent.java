@@ -19,7 +19,7 @@ public class HistoryLogComponent {
     @Autowired
     private DroneService droneService;
 
-    @Scheduled(cron = "*/5 * * * *") //the method scheduled to run in every 5 minutes
+    @Scheduled(cron = "0 * * * * *") //the method scheduled to run in every 5 minutes
     public void updateDroneHistoryLogs() {
         List<DroneBatteryPercentageDto> droneBatteryPercentages = droneService.getDroneBatteryPercentage(); //Getting all drone items in drone table
         HistoryLog historyLog;

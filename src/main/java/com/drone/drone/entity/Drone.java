@@ -52,4 +52,7 @@ public class Drone {
         this.batteryCapacity = batteryCapacity;
         this.state = state;
     }
+
+    public Drone() {
+    }
 }

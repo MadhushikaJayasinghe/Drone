@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "HISTORY_LOG")
 @EntityListeners(AuditingEntityListener.class) // to modify auto generating date data
-@JsonIgnoreProperties(value ={"createdAt","updatedAt"},allowGetters = true)
+@JsonIgnoreProperties(value ={"createdAt"},allowGetters = true)
 public class HistoryLog {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -42,11 +42,6 @@ public class HistoryLog {
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    @JsonIgnore
-    private Date updatedAt;
 
     public HistoryLog(UUID droneId, @Max(100) @Min(0) int batteryCapacity) {
         this.droneId = droneId;
