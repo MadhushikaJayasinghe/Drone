@@ -46,26 +46,26 @@ public class DroneServiceImpl implements DroneService {
         if (drone.getBatteryCapacity() < 25) {
             ResponseDto responseDto = new ResponseDto(false, "drone battery percentage is less than 25", 400);
             return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
-        } else if (!(drone.getDroneState().equals(DroneState.IDLE) || drone.getDroneState().equals(DroneState.LOADING))) {
+        } else if (!(drone.getState().equals(DroneState.IDLE) || drone.getState().equals(DroneState.LOADING))) {
             ResponseDto responseDto = new ResponseDto(false, "drone is not available for loading", 400);
             return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
         }
         double openWeight = medicationDao.getOpenWeightByMedicationId(loadingDto.getMedicationsIds());
-        if (drone.getDroneState().equals(DroneState.LOADING)) {
+        if (drone.getState().equals(DroneState.LOADING)) {
             double weight = medicationDao.getLoadedWeightByDroneId(loadingDto.getDroneId().toString());
             if ((weight + openWeight) > drone.getWeightLimit()) {
                 ResponseDto responseDto = new ResponseDto(false, "drone max weight limit is exceeding", 400);
                 return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
             }
 
-        } else if (drone.getDroneState().equals(DroneState.IDLE)){
+        } else if (drone.getState().equals(DroneState.IDLE)){
             if (openWeight > drone.getWeightLimit()) {
                 ResponseDto responseDto = new ResponseDto(false, "drone max weight limit is exceeding", 400);
                 return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
             }
         }
         medicationDao.updateStatus(loadingDto.getMedicationsIds());
-        drone.setDroneState(DroneState.LOADING);
+        drone.setState(DroneState.LOADING);
         droneRepository.save(drone);
         ResponseDto responseDto = new ResponseDto(true, "successfully updated", 200);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -88,5 +88,8 @@ public class DroneServiceImpl implements DroneService {
         return droneDao.getDroneBatteryPercentage();
     }
 
-
+    @Override
+    public int getCountByDroneId(UUID droneId) {
+        return droneRepository.countByDroneId(droneId);
+    }
 }

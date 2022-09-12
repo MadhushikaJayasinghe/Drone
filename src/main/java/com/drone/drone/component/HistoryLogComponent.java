@@ -19,13 +19,13 @@ public class HistoryLogComponent {
     @Autowired
     private DroneService droneService;
 
-    @Scheduled(cron = "*/5 * * * *", zone = "GMT+0:00")
+    @Scheduled(cron = "*/5 * * * *") //the method scheduled to run in every 5 minutes
     public void updateDroneHistoryLogs() {
-        List<DroneBatteryPercentageDto> droneBatteryPercentages = droneService.getDroneBatteryPercentage();
+        List<DroneBatteryPercentageDto> droneBatteryPercentages = droneService.getDroneBatteryPercentage(); //Getting all drone items in drone table
         HistoryLog historyLog;
         for (DroneBatteryPercentageDto droneBatteryPercentage: droneBatteryPercentages) {
             historyLog = new HistoryLog(droneBatteryPercentage.getDroneId(), droneBatteryPercentage.getBatteryPercentage());
-            historyLogRepository.save(historyLog);
+            historyLogRepository.save(historyLog); //Save current drone battery capacity in history log
         }
     }
 }

@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfig {
+    //Setting up the data source as H2 DB
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()

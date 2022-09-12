@@ -29,13 +29,13 @@ public class DroneController {
         return droneService.loadMedications(medicationsLoadingDto);
     }
 
-    @RequestMapping(value = "/drone/get-available-drones", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "/drone/get-available-drones", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public ResponseEntity getAvailableDronesForLoading() {
         return droneService.checkAvailableDronesForLoading();
     }
 
-    @RequestMapping(value = "/drone/get-battery-capacity", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-    public ResponseEntity getBatteryCapacity(@Valid @NotNull(message = "Drone id cannot be null")@RequestParam("infantId") UUID droneId) {
+    @RequestMapping(value = "/drone/get-battery-capacity", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+    public ResponseEntity getBatteryCapacity(@Valid @NotNull(message = "Drone id cannot be null")@RequestParam("droneId") UUID droneId) {
         return droneService.getBatteryLevel(droneId);
     }
 

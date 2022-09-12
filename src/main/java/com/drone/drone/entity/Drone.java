@@ -43,13 +43,13 @@ public class Drone {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DroneState droneState;
+    private DroneState state;
 
-    public Drone(@Size(max = 100) String serialNumber, DroneModel model, @Max(500) @Min(0) double weightLimit, @Max(100) @Min(0) int batteryCapacity, DroneState droneState) {
+    public Drone(@Size(max = 100) String serialNumber, DroneModel model, @Max(500) @Min(0) double weightLimit, @Max(100) @Min(0) int batteryCapacity, DroneState state) {
         this.serialNumber = serialNumber;
         this.model = model;
         this.weightLimit = weightLimit;
         this.batteryCapacity = batteryCapacity;
-        this.droneState = droneState;
+        this.state = state;
     }
 }

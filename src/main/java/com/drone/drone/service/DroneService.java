@@ -14,5 +14,5 @@ public interface DroneService {
     ResponseEntity checkAvailableDronesForLoading();
     ResponseEntity getBatteryLevel(UUID droneId);
     List<DroneBatteryPercentageDto> getDroneBatteryPercentage();
-
+    int getCountByDroneId(UUID droneId);
 }

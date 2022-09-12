@@ -20,7 +20,7 @@ public class DroneDaoImpl implements DroneDao {
 
     @Override
     public List<DroneIdSerialDto> getAvailableDronesForLoading() {
-        return jdbcTemplate.query("SELECT drone_id,serial_number FROM drone WHERE battery_capacity > 24 AND state IN (IDLE , LOADING)",
+        return jdbcTemplate.query("SELECT drone_id,serial_number FROM drone WHERE battery_capacity > 24 AND state IN ('IDLE' , 'LOADING')",
                 new DroneIdSerialDtoRowMapper());
     }
 
