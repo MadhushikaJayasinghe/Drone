@@ -9,6 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.UUID;
+
 @Validated
 @RestController
 public class DroneController {
@@ -25,4 +28,15 @@ public class DroneController {
     public ResponseEntity loadMedications(@Valid @RequestBody MedicationsLoadingDto medicationsLoadingDto) {
         return droneService.loadMedications(medicationsLoadingDto);
     }
+
+    @RequestMapping(value = "/drone/get-available-drones", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public ResponseEntity getAvailableDronesForLoading() {
+        return droneService.checkAvailableDronesForLoading();
+    }
+
+    @RequestMapping(value = "/drone/get-battery-capacity", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public ResponseEntity getBatteryCapacity(@Valid @NotNull(message = "Drone id cannot be null")@RequestParam("infantId") UUID droneId) {
+        return droneService.getBatteryLevel(droneId);
+    }
+
 }

@@ -14,7 +14,7 @@ public class DatabaseConfig {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2) // HSQL or DERBY
+                .setType(EmbeddedDatabaseType.H2)
                 .addScript("jdbc/schema.sql")
                 .addScript("jdbc/data.sql")
                 .build();

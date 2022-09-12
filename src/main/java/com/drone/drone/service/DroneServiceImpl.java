@@ -1,9 +1,8 @@
 package com.drone.drone.service;
 
+import com.drone.drone.dao.DroneDao;
 import com.drone.drone.dao.MedicationDao;
-import com.drone.drone.dto.DroneRegistrationDto;
-import com.drone.drone.dto.MedicationsLoadingDto;
-import com.drone.drone.dto.ResponseDto;
+import com.drone.drone.dto.*;
 import com.drone.drone.entity.Drone;
 import com.drone.drone.enums.DroneModel;
 import com.drone.drone.enums.DroneState;
@@ -13,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class DroneServiceImpl implements DroneService {
 
@@ -21,6 +23,9 @@ public class DroneServiceImpl implements DroneService {
 
     @Autowired
     private MedicationDao medicationDao;
+
+    @Autowired
+    private DroneDao droneDao;
 
     @Override
     public ResponseEntity registerDrone(DroneRegistrationDto registrationDto) {
@@ -68,7 +73,15 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     public ResponseEntity checkAvailableDronesForLoading() {
-
-        return null;
+        List<DroneIdSerialDto> availableDronesForLoading = droneDao.getAvailableDronesForLoading();
+        return new ResponseEntity<>(availableDronesForLoading, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity getBatteryLevel(UUID droneId) {
+        DroneBatteryPercentageDto droneBatteryPercentageDto = droneDao.getBatteryPercentageById(droneId);
+        return new ResponseEntity<>(droneBatteryPercentageDto, HttpStatus.OK);
+    }
+
+
 }
