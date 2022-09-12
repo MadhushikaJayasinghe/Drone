@@ -36,6 +36,6 @@ public class Medication {
     private UUID droneId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "default OPEN")
+    @Column(nullable = false)
     private MedicationOrderStatus status;
 }
