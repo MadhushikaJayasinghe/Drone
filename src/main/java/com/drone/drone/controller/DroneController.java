@@ -33,7 +33,7 @@ public class DroneController {
     }
 
     @RequestMapping(value = "/drone/get-battery-capacity", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
-    public ResponseEntity getBatteryCapacity(@Valid @NotNull(message = "Drone id cannot be null")@RequestParam("droneId") UUID droneId) {
+    public ResponseEntity getBatteryCapacity(@Valid @NotNull(message = "Drone id cannot be null") @RequestParam("droneId") UUID droneId) {
         return droneService.getBatteryLevel(droneId);
     }
 

@@ -6,7 +6,6 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "HISTORY_LOG")
 @EntityListeners(AuditingEntityListener.class) // to modify auto generating date data
-@JsonIgnoreProperties(value ={"createdAt"},allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
 public class HistoryLog {
     @Id
     @GeneratedValue(generator = "UUID")

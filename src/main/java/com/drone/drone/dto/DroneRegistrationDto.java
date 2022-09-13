@@ -9,8 +9,8 @@ import javax.validation.constraints.Size;
 
 @Data
 public class DroneRegistrationDto {
-    @Size (max = 100, message = "serial number must be less than 100 characters")
-    private  String serialNumber;
+    @Size(max = 100, message = "serial number must be less than 100 characters")
+    private String serialNumber;
 
     @Pattern(regexp = "Lightweight|Middleweight|Cruiserweight|Heavyweight", message = "invalid drone model")
     private String model;

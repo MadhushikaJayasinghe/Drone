@@ -1,6 +1,5 @@
 package com.drone.drone.dao;
 
-import com.drone.drone.dto.DroneIdSerialDto;
 import com.drone.drone.dto.MedicationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,19 +25,19 @@ public class MedicationDaoImpl implements MedicationDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public double getLoadedWeightByDroneId(String droneId) throws NullPointerException{
-        return jdbcTemplate.queryForObject("SELECT SUM (weight) FROM medication WHERE drone_id = ? AND status = 'LOADED'", Double.class, new Object[]{droneId});
+    public int getLoadedWeightByDroneId(String droneId) throws NullPointerException {
+        return jdbcTemplate.queryForObject("SELECT SUM (weight) FROM medication WHERE drone_id = ? AND status = 'LOADED'", Integer.class, new Object[]{droneId});
     }
 
     @Override
-    public double getOpenWeightByMedicationId(List<String> medications) throws NullPointerException{
+    public int getOpenWeightByMedicationId(List<String> medications) throws NullPointerException {
         Map idsMap = Collections.singletonMap("ids", medications);
-        return namedParameterJdbcTemplate.queryForObject( "SELECT SUM (weight) FROM medication WHERE medication_id IN (:ids)", idsMap, Double.class);
+        return namedParameterJdbcTemplate.queryForObject("SELECT SUM (weight) FROM medication WHERE medication_id IN (:ids)", idsMap, Integer.class);
     }
 
     @Override
     public void updateStatus(String medicationId, String droneId) {
-        namedParameterJdbcTemplate.update( "UPDATE medication SET status = 'LOADED' , drone_id = :droneId WHERE medication_id = :medicationId", new MapSqlParameterSource()
+        namedParameterJdbcTemplate.update("UPDATE medication SET status = 'LOADED' , drone_id = :droneId WHERE medication_id = :medicationId", new MapSqlParameterSource()
                 .addValue("droneId", droneId)
                 .addValue("medicationId", medicationId));
     }
@@ -46,7 +45,7 @@ public class MedicationDaoImpl implements MedicationDao {
     @Override
     public List<MedicationDto> getMedicationsByDroneId(String droneId) {
         return jdbcTemplate.query("SELECT medication_id,code,name,photo_url,weight FROM medication WHERE drone_id = ? AND status = 'LOADED'",
-                new MedicationDtoRowMapper(),new Object[]{droneId});
+                new MedicationDtoRowMapper(), new Object[]{droneId});
     }
 
     public static final class MedicationDtoRowMapper implements RowMapper<MedicationDto> {

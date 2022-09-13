@@ -23,9 +23,9 @@ public class Drone {
     @Column(columnDefinition = "char(36)")
     private UUID droneId;
 
-    @Column( nullable = false) //check
+    @Column(nullable = false) //check
     @Size(max = 100)
-    private  String serialNumber;
+    private String serialNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -10,9 +10,14 @@ import java.util.UUID;
 
 public interface DroneService {
     ResponseEntity registerDrone(DroneRegistrationDto registrationDto);
+
     ResponseEntity loadMedications(MedicationsLoadingDto loadingDto);
+
     ResponseEntity checkAvailableDronesForLoading();
+
     ResponseEntity getBatteryLevel(UUID droneId);
+
     List<DroneBatteryPercentageDto> getDroneBatteryPercentage();
+
     int getCountByDroneId(UUID droneId);
 }

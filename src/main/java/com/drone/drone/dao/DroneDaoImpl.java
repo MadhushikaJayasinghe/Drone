@@ -26,7 +26,7 @@ public class DroneDaoImpl implements DroneDao {
 
     @Override
     public DroneBatteryPercentageDto getBatteryPercentageById(UUID droneId) {
-        return jdbcTemplate.queryForObject("SELECT drone_id,battery_capacity FROM drone WHERE drone_id = ?",  new DroneBatteryPercentageDtoRowMapper(),droneId.toString());
+        return jdbcTemplate.queryForObject("SELECT drone_id,battery_capacity FROM drone WHERE drone_id = ?", new DroneBatteryPercentageDtoRowMapper(), droneId.toString());
     }
 
     @Override

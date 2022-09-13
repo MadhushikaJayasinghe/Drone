@@ -23,7 +23,7 @@ public class HistoryLogComponent {
     public void updateDroneHistoryLogs() {
         List<DroneBatteryPercentageDto> droneBatteryPercentages = droneService.getDroneBatteryPercentage(); //Getting all drone items in drone table
         HistoryLog historyLog;
-        for (DroneBatteryPercentageDto droneBatteryPercentage: droneBatteryPercentages) {
+        for (DroneBatteryPercentageDto droneBatteryPercentage : droneBatteryPercentages) {
             historyLog = new HistoryLog(droneBatteryPercentage.getDroneId(), droneBatteryPercentage.getBatteryPercentage());
             historyLogRepository.save(historyLog); //Save current drone battery capacity in history log
         }
