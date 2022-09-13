@@ -84,8 +84,14 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     public ResponseEntity getBatteryLevel(UUID droneId) {
-        DroneBatteryPercentageDto droneBatteryPercentageDto = droneDao.getBatteryPercentageById(droneId);
-        return new ResponseEntity<>(droneBatteryPercentageDto, HttpStatus.OK);
+        int count = getCountByDroneId(droneId);
+        if (count == 1) { //Check whether drone id is valid
+            DroneBatteryPercentageDto droneBatteryPercentageDto = droneDao.getBatteryPercentageById(droneId);
+            return new ResponseEntity<>(droneBatteryPercentageDto, HttpStatus.OK);
+        } else {
+            ResponseDto responseDto = new ResponseDto(false, "drone id not found", 404);
+            return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
